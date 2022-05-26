@@ -2,7 +2,7 @@ package ru.netology.domain;
 
 public class Radio {
 
-    private int currentStation;
+    public int currentStation;
 
     public void setCurrentStation(int currentStation) {
         if (currentStation < 0) {
