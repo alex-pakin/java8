@@ -2,13 +2,26 @@ package ru.netology.domain;
 
 public class Radio {
 
-    public int currentStation;
+    private int currentStation;
+    private int currentVolume;
+    private int quantityOfStation = 10;
+
+    public Radio(int quantityOfStation) {
+        this.quantityOfStation = quantityOfStation;
+    }
+
+    public Radio() {
+    }
+
+    public int getQuantityOfStation() {
+        return quantityOfStation;
+    }
 
     public void setCurrentStation(int currentStation) {
         if (currentStation < 0) {
             return;
         }
-        if (currentStation > 9) {
+        if (currentStation >= quantityOfStation) {
             return;
         }
         this.currentStation = currentStation;
@@ -18,31 +31,11 @@ public class Radio {
         return currentStation;
     }
 
-    public void increaseStation() {
-        int nextStation = currentStation + 1;
-        if (nextStation > 9) {
-            currentStation = 0;
-        } else {
-            setCurrentStation(nextStation);
-        }
-    }
-
-    public void decreaseStation() {
-        int prevStation = currentStation - 1;
-        if (prevStation < 0) {
-            currentStation = 9;
-        } else {
-            setCurrentStation(prevStation);
-        }
-    }
-
-    private int currentVolume;
-
     public void setCurrentVolume(int currentVolume) {
         if (currentVolume < 0) {
             return;
         }
-        if (currentVolume > 10) {
+        if (currentVolume > 100) {
             return;
         }
         this.currentVolume = currentVolume;
@@ -52,10 +45,28 @@ public class Radio {
         return currentVolume;
     }
 
+    public void increaseStation() {
+        int nextStation = currentStation + 1;
+        if (nextStation >= quantityOfStation) {
+            currentStation = 0;
+        } else {
+            setCurrentStation(nextStation);
+        }
+    }
+
+    public void decreaseStation() {
+        int prevStation = currentStation - 1;
+        if (prevStation < 0) {
+            currentStation = quantityOfStation - 1;
+        } else {
+            setCurrentStation(prevStation);
+        }
+    }
+
     public void increaseVolume() {
         int moreVolume = currentVolume + 1;
-        if (moreVolume > 10) {
-            currentVolume = 10;
+        if (moreVolume > 100) {
+            currentVolume = 100;
         } else {
             setCurrentVolume(moreVolume);
         }
